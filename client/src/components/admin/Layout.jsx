@@ -5,7 +5,7 @@ import { assets } from '../../assets/assets'
 const Layout = () => {
   return (
     <>
-        <div className='text-[#515151] text-lg font-normal w-60 h-full border-r border-[#D8D8D8] py-4 flex flex-col'>
+        <div className='text-[#515151] text-lg font-normal sm:w-full lg:w-60 h-full border-r border-[#D8D8D8] py-4 flex flex-col'>
             <NavLink end={true} to='/admin' className={({ isActive }) => {
                 return `px-8 py-4 flex ${isActive && 'border-r-6 border-[#5F6FFF] bg-[#F2F3FF]'}`
             }} >
