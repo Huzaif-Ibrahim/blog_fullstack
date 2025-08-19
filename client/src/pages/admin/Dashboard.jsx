@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 const Dashboard = () => {
 
   const { axios } = useContextState()
+  const [loading, setLoading] = useState(false)
 
   const [blogData, setBlogData] = useState({
     recentBlogs: [],
@@ -17,10 +18,13 @@ const Dashboard = () => {
 
   const fetchDashboard = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get('/api/admin/dashboard')
       data.success ? setBlogData({ recentBlogs : data.DashboardData.blogs, blogs : data.DashboardData.totalBlogs, comments : data.DashboardData.totalComments, drafts : data.DashboardData.draftBlogs }) : toast.error(data.message)
     } catch (error) {
       toast.error(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -36,21 +40,21 @@ const Dashboard = () => {
         <div className='group flex items-center rounded-lg shadow-2xs p-4 w-56 bg-white border border-black/5'>
           <img src={assets.dashboard_icon_1} alt="dashboard_icon_1" className='mr-4 w-16 group-hover:scale-115 transition-all duration-500' />
           <div className='flex flex-col gap-0 justify-center'>
-            <p className='text-2xl text-[#515151] font-medium'>{blogData.blogs}</p>
+            <div className='text-2xl text-[#515151] font-medium'>{!loading ? <p>{blogData.blogs}</p> : <div className="h-6 w-8 bg-gray-300 rounded animate-pulse"></div> }</div>
             <p className='text-base text-[#8893B0] font-normal'>Blogs</p>
           </div>
         </div>
         <div className='group flex items-center rounded-lg shadow-2xs p-4 w-56 bg-white border border-black/5'>
           <img src={assets.dashboard_icon_2} alt="dashboard_icon_2" className='mr-4 w-16 group-hover:scale-115 transition-all duration-500' />
           <div className='flex flex-col gap-0 justify-center'>
-            <p className='text-2xl text-[#515151] font-medium'>{blogData.comments}</p>
+            <div className='text-2xl text-[#515151] font-medium'>{!loading ? <p>{blogData.comments}</p> : <div className="h-6 w-8 bg-gray-300 rounded animate-pulse"></div> }</div>
             <p className='text-base text-[#8893B0] font-normal'>Comments</p>
           </div>
         </div>
         <div className='group flex items-center rounded-lg shadow-2xs p-4 w-56 bg-white border border-black/5'>
           <img src={assets.dashboard_icon_3} alt="dashboard_icon_3" className='mr-4 w-16 group-hover:scale-115 transition-all duration-500' />
           <div className='flex flex-col gap-0 justify-center'>
-            <p className='text-2xl text-[#515151] font-medium'>{blogData.drafts}</p>
+            <p className='text-2xl text-[#515151] font-medium'>{!loading ? <p>{blogData.drafts}</p> : <div className="h-6 w-8 bg-gray-300 rounded animate-pulse"></div> }</p>
             <p className='text-base text-[#8893B0] font-normal'>Drafts</p>
           </div>
         </div>
@@ -65,7 +69,23 @@ const Dashboard = () => {
         </div>
 
         <div className='mt-4 w-5xl overflow-hidden rounded-xl border border-[#D8D8D880]/50 bg-white'>
-          {
+          {loading ? <div className="space-y-4 p-6">
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex items-start space-x-3 animate-pulse"
+                >
+                  {/* Comment content */}
+                  <div className="flex-1 space-y-2">
+                    {/* Username */}
+                    <div className="h-4 w-1/4 bg-gray-300 rounded"></div>
+                    {/* Comment text (multiple lines) */}
+                    <div className="h-3 w-3/4 bg-gray-300 rounded"></div>
+                    <div className="h-3 w-2/3 bg-gray-300 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div> :
             blogData.blogs > 0 ? <table className='w-full'>
           <thead className='text-base text-[#323232] border-b border-[#D8D8D880]'>
             <tr>
