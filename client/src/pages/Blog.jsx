@@ -78,7 +78,7 @@ const Blog = () => {
     fetchBlog()
     fetchComments()
     scrollTo(0, 0)
-  }, [])
+  }, [comments])
 
   if (loading) {
     return <>
