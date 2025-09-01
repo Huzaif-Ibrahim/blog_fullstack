@@ -94,10 +94,10 @@ const Blog = () => {
       <div className='px-4 lg:px-0 flex flex-col py-16'>
 
         <div className="texts max-w-3xl mx-auto text-center flex flex-col items-center gap-0 md:gap-2 lg:gap-4">
-          <p className='text-[#5044E5] font-medium text-lg'>Published on {Moment(blogData.createdAt).format('MMM Do YYYY') || 'Unknown'}</p>
+          <p className='text-[#5044E5] font-medium text-xs md:text-lg'>Published on {Moment(blogData.createdAt).format('MMM Do YYYY') || 'Unknown'}</p>
           <h1 className='text-5xl font-semibold lg:leading-16 text-[#3B3B3B]'>{blogData.title}</h1>
           <h2 className='text-[#4E4E4E] font-normal text-lg' dangerouslySetInnerHTML={{ __html: blogData.subTitle }} ></h2>
-          <img src={assets.gradientBackground} alt="bg_gradient" className='absolute -z-1 top-0 left-0 md:-top-30 w-full' />
+          <img src={assets.gradientBackground} alt="bg_gradient" className='absolute -z-1 top-20 left-0 md:-top-30 w-full' />
         </div>
 
         <div className="img max-w-5xl mx-auto w-full py-6 lg:my-12">

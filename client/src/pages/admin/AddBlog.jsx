@@ -76,7 +76,6 @@ const AddBlog = () => {
     }
   }
 
-
   useEffect(() => {
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, { theme: 'snow' })
@@ -150,7 +149,7 @@ const AddBlog = () => {
             <select
               name="category"
               className='outline-0 p-2 border border-[#2525254D] w-fit rounded-lg'
-              onChange={() => setCategory(e.target.value)}
+              onChange={(e) => setCategory(e.target.value)}
             >
               {
                 blogCategories.slice(1).map((elem, indx) => {
