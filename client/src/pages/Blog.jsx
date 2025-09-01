@@ -77,7 +77,6 @@ const Blog = () => {
   useEffect(() => {
     fetchBlog()
     fetchComments()
-    scrollTo(0, 0)
   }, [comments])
 
   if (loading) {
